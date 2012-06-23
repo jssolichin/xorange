@@ -1,0 +1,99 @@
+
+body {background: #eee url(img/bg.png); font-family: sans-serif; color: #222; margin: 0px; padding: 0px; overflow-x: hidden;
+
+}
+h1,h2,h3,h4,h5,h6, #nav-control ul li {margin: 0px; padding: 0px; letter-spacing: -4px; font-weight: bold;}
+h1 {font-size:2.5em;}
+h2 {font-size:2.2em;}
+h3 {font-size:2em;}
+h4 {font-size:1.8em;}
+h5 {font-size:1.6em;}
+h6 {font-size:1.5em;}
+
+h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
+.search:after, #nav-icons ul:after, #page-actions:after, #breadcrumb:after, #content:after, #gadget-container:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+
+#sidebar-wrapper {width: 20%; height: 100%; position: absolute; right: 0px; top:0; z-index: 999;}
+#sidebar { width: 20%; top: 0px; right: 0px; height: 100%; margin: 0px; position: fixed; z-index:99;}
+#title { width: 100%;position: relative;}
+#sidebar h3 {font-size: 1.6em; letter-spacing: -1px;}
+
+#site-title {margin: 14px 10px;font-size: 3em; font-weight:bold;}
+#search-wrapper {background: #fff; padding: 5px; border: 10px solid rgba(0,0,0,0.1);
+	-moz-background-clip: padding; -webkit-background-clip: padding;background-clip: padding-box; }
+form{width:100%;}
+form .text-field{float: left;border: 0px ;padding: 2px;width:88%;}
+input.submit{width:16px;height:16x;display:block;overflow:hidden;
+text-indent:-999px; /* To remove any default text on the button*/
+line-height:16px; /* required for IE */
+background:url(img/search-sprite.gif) no-repeat 0 0; /* This will display the search icon by default */
+cursor:pointer; /* Hand cursor for the normal state */
+border: none;float: left;margin: 3px;padding: 0;}
+input.submit:hover{background-position: 0 -16px; /* This will display the dark search icon on hover */}
+input.submit:active{
+background-position: 0 -32px; /* And finally, this is the one that shows the loader */
+cursor:wait; /* Shows the wait cursor on click */}
+
+#nav-control-wrapper {height: 70px; padding: 30px 0 0px 0;}
+#nav-icons {background: url(img/icons.png) no-repeat; width: 24z0px; height: 20px; margin-left: 10px;}
+#nav-icons ul li:first-child {margin-left: 18px;}
+#nav-icons ul li:nth-child(2) {margin-left: 32px;}
+#nav-icons ul li:nth-child(4) {margin-left: 26px;}
+#nav-icons ul li {float: left; margin: -8px 0 0 30px; color: #d25400; font-weight: bold;}
+#nav-control {position: absolute; clip: rect(0px 300px 40px 0px); z-index: 999; }
+#nav-control h2 { padding: 5px; visibility:hidden;}
+#nav-control:hover {clip: auto;}
+#nav-control ul {list-style-type: none; margin: 0px; padding: 0px;}
+#nav-control ul li {background: #333; padding: 5px 10px; width: 100%;}
+#nav-control ul li a {text-decoration: none; color: #000;}
+.active {background: none !important; position: absolute; top: 0px;}
+#nav-control:hover .active {background:  #555 !important; box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); }
+#nav-control:hover a {color: #eee; !important;}
+#nav-control:hover a:hover {color: #fff; !important;}
+
+#change {overflow-x:hidden;overflow-y:hidden;position:relative;padding: 0px 10px 10px 10px;}
+#change:hover {overflow-y:auto;}
+#change a, #change a:visited {color: #d25400;}
+#change a:hover {color: #555;}
+#change h3 {margin: 10px 0 5px 0;}
+#change ul li a {text-decoration: none; font-size: 1.2em; letter-spacing: -1px;}
+.side-section { margin-bottom: 60px;}
+
+#page-suplemental {box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); background: #fff; margin:0px -10px 10px -10px; padding: 10px;}
+#page-meta a:hover {background: #fff;}
+#page-meta {font-size:.8em; background:  url(img/bg.png); margin: 0 -10px; padding: 10px;}
+#page-meta dl dt, #page-meta dl dd {display: inline;}
+#page-meta dl dt {font-weight: bold;}
+#page-actions {margin: 20px 0 0px 0; }
+#page-actions ul li {display: inline;}
+#page-edit {float: left;}
+#page-export {float: right;}
+#page-export ul {display: inline;}
+#toc {margin: 5px 0;}
+#toc ul li ul {border-left: 2px solid rgba(0, 0, 0,.1); padding: 5px 10px; font-size: .8em;}
+
+#main-area {width: 80%; }
+#breadcrumb {padding: 10px; margin-right:-30px;}
+#breadcrumb ul {list-style-type:none; margin: 0px; padding: 0px;}
+#breadcrumb ul li {float: left; font-weight: bold;}
+#breadcrumb ul li span {font-weight: normal; margin-right: 2px;}
+#breadcrumb ul li:before{content: "\00BB"; margin: 0 10px;}
+#breadcrumb ul li:first-child:before{content: ""; margin: 0px;}
+
+#content {color: #555;  font-size: .9em;background: #fff; border-top: 20px solid #d25400; padding: 10px; box-shadow: 30px 0px 0px rgba(0, 0, 0,.1); }
+#page-title {margin-bottom: 10px; font-size:3.5em;}
+#info {color: #333;  background: #eee; display: block; padding: 10px; margin: 10px -10px;}
+#gadget-container {}
+#gadget-left, #gadget-right {float: left; width: 48.618784527%;
+    *width: 48.5655930376383%;}
+#gadget-left {margin-left: .7%;}
+#gadget-right {margin-right: .7%; float: right; }
+.section {margin: 0 0 10px 0; padding: 10px 0;border: 3px solid #eee; border-left: 0px; border-right: 0px;}
+.section h2 {font-size:2.2em;margin: 0px 0 10px 0; color: #005aa9;  letter-spacing: -3px;}
+.section p { margin-bottom: 10px;}
+
+::-webkit-scrollbar {width: 10px;}
+::-webkit-scrollbar-track {background: #ccc;}
+::-webkit-scrollbar-thumb {background: #aaa;}
+::-webkit-scrollbar-thumb:hover {background: #777;}
+::-webkit-scrollbar-thumb:active {background: #888;}
