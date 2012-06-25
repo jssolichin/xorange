@@ -11,7 +11,7 @@ h5 {font-size:1.6em;}
 h6 {font-size:1.5em;}
 
 h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
-.search:after, #nav-icons ul:after, #page-actions:after, #breadcrumb:after, #content:after, #gadget-container:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.search:after, .each-comment:after, #nav-icons ul:after, #page-actions:after, #breadcrumb:after, #content:after, #gadget-container:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 
 #sidebar-wrapper {width: 20%; height: 100%; position: absolute; right: 0px; top:0; z-index: 999;}
 #sidebar { width: 20%; top: 0px; right: 0px; height: 100%; margin: 0px; position: fixed; z-index:99;}
@@ -57,7 +57,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #change a:hover {color: #555;}
 #change h3 {margin: 10px 0 5px 0;}
 #change ul li a {text-decoration: none; font-size: 1.2em; letter-spacing: -1px;}
-.side-section { margin-bottom: 60px;}
+.side-section { margin-bottom: 100px;}
 
 #page-suplemental {box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); background: #fff; margin:0px -10px 10px -10px; padding: 10px;}
 #page-meta a:hover {background: #fff;}
@@ -71,6 +71,10 @@ cursor:wait; /* Shows the wait cursor on click */}
 #page-export ul {display: inline;}
 #toc {margin: 5px 0;}
 #toc ul li ul {border-left: 2px solid rgba(0, 0, 0,.1); padding: 5px 10px; font-size: .8em;}
+
+.each-comment {font-size: .9em; background: rgba(255, 255, 255,.4); margin:0px -10px 10px -10px; padding: 10px;}
+.each-comment-user img {float: left; margin: 0 10px 0 0;}
+.each-comment-user h4 {font-size: 1.4em; letter-spacing: -1px;margin: 10px 0 0 0 ;}
 
 #main-area {width: 80%; }
 #breadcrumb {padding: 10px; margin-right:-30px;}
