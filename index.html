@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
@@ -81,7 +84,10 @@
           <ul>
             <li id="main-link" class="active"><a href="#main">Main</a></li>
             <li id="comments-link"><a href="#comments">Comments</a></li>
+            <li id="annotations-link"><a href="#annotations">Annotations</a></li>
             <li id="attachments-link"><a href="#attachments">Attachments</a></li>
+            <li id="history-link"><a href="#history">History</a></li>
+            <li id="information-link"><a href="#information">Information</a></li>
           </ul> 
       </div>
     </div>
@@ -141,6 +147,7 @@
   </div>
 
   <div id="comments" class="side-section">
+    <h2>Comments</h2>
     <div class="each-comment">
       <div class="each-comment-content">
         <p>A Comment. Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem.</p>
@@ -173,11 +180,78 @@
     </div>
   </div>
 
-  <div id="attachments" class="side-section">
-    <p>Attachments. Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+  <div id="annotations" class="side-section">
+    <h2>Annotations</h2>
+    <div class="each-comment">
+      <div class="each-comment-content">
+        <p>No annotations for this document</p>
+      </div>
+    </div>
   </div>
-</div>
+
+  <div id="attachments" class="side-section">
+    <h2>Attachments</h2>
+    <div class="each-comment">
+      <div class="each-comment-content">
+        <span class="name">Fullscreen.png </span><span class="version">1.6</span>
+      </div>
+      <div class="each-comment-user">
+        <img src="http://placehold.it/50x50/fff">
+        <h4><a href="#">Silvia Rusu</a></h4>
+        <time datetime="2012-02-17">February 17, 2012</time> <span>36.1kb</span>
+      </div>
+    </div>
+    <div class="each-comment">
+      <div class="each-comment-content">
+        <span class="name">EditSimpleMode.png </span><span class="version">1.1</span>
+      </div>
+      <div class="each-comment-user">
+        <img src="http://placehold.it/50x50/fff">
+        <h4><a href="#">Sorin Burjan</a></h4>
+        <time datetime="2012-02-17">February 17, 2012</time> <span>19.9kb</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="history" class="side-section">
+    <h2>History</h2>
+    <div class="each-comment">
+      <div class="each-comment-content">
+        <p>No annotations for this document</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="information" class="side-section">
+    <h2>Information</h2>
+    <h3 class="sub-menu">Parent</h3>
+    <ul>
+      <li><a href="#">Platform Features</a></li>
+    </ul>
+    <h3 class="sub-menu">Children</h3>
+    <ul>
+      <li><a href="#">Features</a>
+        <ul>
+          <li><a href="#">WYSIWYG Editor</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h3 class="sub-menu">Backlinks</h3>
+    <ul>
+      <li><a href="#">Admin Guide</a>
+        <ul>
+          <li><a href="#">Configuration</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Features</a>
+        <ul>
+          <li><a href="#">Document Lifecycle</a></li>
+          <li><a href="#">Version Control</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div><!--change-->
 
   </div>
 </div>
@@ -203,10 +277,6 @@ $( "#sidebar-wrapper" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w", 
   }
 });
 
-// get section positions to use to detect what section viewer is on
-var main = Math.floor($('#main').offset().top)-$("#title").height(),
-    comments = Math.floor($('#comments').offset().top)-$("#title").height(),
-    attachments = Math.floor($('#attachments').offset().top)-$("#title").height();
 
 // make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
 $(window).resize(function () { 
@@ -214,9 +284,6 @@ $(window).resize(function () {
   $("#main-area").width($(window).width()-$("#sidebar-wrapper").width());
   $( "#sidebar-wrapper" ).css({'position': 'absolute', 'left': $("#sidebar").position().left, 'height': $(window).height()});
 
-var main = Math.floor($('#main').offset().top)-$("#title").height(),
-    comments = Math.floor($('#comments').offset().top)-$("#title").height(),
-    attachments = Math.floor($('#attachments').offset().top)-$("#title").height();
 });
 
 // .active is used to put the current section as the title header (for the dropdown menu)
@@ -229,21 +296,39 @@ $("#nav-control ul li").click(function(){
 // indicate which section at while scrolling and apply .active to active section
 $("#change").scroll(function(){
 
-  if( $('#main').position().top <= 0 && $('#main').position().top >0-$('#main').height()){
+// first get position of div from the top. then check if that position has now become 0. if it has become 0, then viewer is in that section. However since, we originally have a title there, we will offset 25 so that the section is activated once the original title go above the view. Additionally, check that it is within the div's position from the top + the height of the div. 
+
+  if( $('#main').position().top <= -25 && $('#main').position().top >0-$('#main').height()){
     $(".active").removeClass('active');
     $("#main-link").addClass('active')
   }
   
-  if( $('#comments').position().top <= 0 && $('#comments').position().top >0-$('#comments').height()){
+  if( $('#comments').position().top <= -25 && $('#comments').position().top >0-$('#comments').height()){
     $(".active").removeClass('active');
     $("#comments-link").addClass('active')
   }
-  
-  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight()
-    || $('#attachments').position().top <= 0 && $('#attachments').position().top >0-$('#attachments').height() ) 
-  {
+
+  if( $('#annotations').position().top <= -25 && $('#annotations').position().top >0-$('#annotations').height()){
+    $(".active").removeClass('active');
+    $("#annotations-link").addClass('active')
+  }
+
+  if( $('#attachments').position().top <= -25 && $('#attachments').position().top >0-$('#attachments').height()){
     $(".active").removeClass('active');
     $("#attachments-link").addClass('active')
+  }
+
+  if( $('#history').position().top <= -25 && $('#history').position().top >0-$('#history').height()){
+    $(".active").removeClass('active');
+    $("#history-link").addClass('active')
+  }
+  
+  //the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. Either that or, the div's position is now 0 like before AND it has passed the previous section. 
+  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight()
+    || $('#information').position().top <= -25 && $('#history').position().top >0-$('#history').height() ) 
+  {
+    $(".active").removeClass('active');
+    $("#information-link").addClass('active')
   }
 });
 
