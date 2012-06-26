@@ -13,11 +13,7 @@ h6 {font-size:1.5em;}
 h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
 .search:after, .each-comment:after, #nav-icons ul:after, #page-actions:after, #breadcrumb:after, #content:after, #gadget-container:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 
-#sidebar-wrapper {width: 20%; height: 100%; position: absolute; right: 0px; top:0; z-index: 999;}
-#sidebar { width: 20%; top: 0px; right: 0px; height: 100%; margin: 0px; position: fixed; z-index:99;}
-#title { width: 100%;position: relative;}
-#sidebar h3 {font-size: 1.6em; letter-spacing: -1px;}
-
+#header {position: fixed; right: 0px; top: 0px; width: 20%;}
 #site-title {margin: 14px 10px;font-size: 3em; font-weight:bold;}
 #search-wrapper {background: #fff; padding: 5px; border: 10px solid rgba(0,0,0,0.1);
 	-moz-background-clip: padding; -webkit-background-clip: padding;background-clip: padding-box; }
@@ -33,6 +29,9 @@ input.submit:hover{background-position: 0 -16px; /* This will display the dark s
 input.submit:active{
 background-position: 0 -32px; /* And finally, this is the one that shows the loader */
 cursor:wait; /* Shows the wait cursor on click */}
+
+#sidebar {width: 20%; position: fixed; right: 0px; top:130px; bottom: 0px; overflow-y: auto; z-index: 999; }
+#sidebar h3 {font-size: 1.6em; letter-spacing: -1px;}
 
 #nav-control-wrapper {height: 70px; padding: 30px 0 0px 0;}
 #nav-icons {background: url(img/icons.png) no-repeat; width: 24z0px; height: 20px; margin-left: 10px;}
@@ -51,7 +50,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #nav-control:hover a {color: #eee; !important;}
 #nav-control:hover a:hover {color: #fff; !important;}
 
-#change {overflow-x:hidden;overflow-y:hidden;position:relative;padding: 0px 10px 10px 10px;}
+#change {overflow-x:hidden;overflow-y:hidden;position:absolute; top: 100px; bottom: 0px;padding: 0px 10px 0px 10px;}
 #change:hover {overflow-y:auto;}
 #change a, #change a:visited {color: #d25400;}
 #change a:hover {color: #555;}
@@ -76,7 +75,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 .each-comment-user img {float: left; margin: 0 10px 0 0;}
 .each-comment-user h4 {font-size: 1.4em; letter-spacing: -1px;margin: 10px 0 0 0 ;}
 
-#main-area {width: 80%; }
+#main-area {width: 80%;}
 #breadcrumb {padding: 10px; margin-right:-30px;}
 #breadcrumb ul {list-style-type:none; margin: 0px; padding: 0px;}
 #breadcrumb ul li {float: left; font-weight: bold;}
@@ -84,7 +83,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #breadcrumb ul li:before{content: "\00BB"; margin: 0 10px;}
 #breadcrumb ul li:first-child:before{content: ""; margin: 0px;}
 
-#content {color: #555;  font-size: .9em;background: #fff; border-top: 20px solid #d25400; padding: 10px; box-shadow: 30px 0px 0px rgba(0, 0, 0,.1); }
+#content {color: #555;  font-size: .9em;background: #fff; border-top: 20px solid #d25400; padding: 10px 10px 15px 10px; box-shadow: 30px 0px 0px rgba(0, 0, 0,.1); }
 #page-title {margin-bottom: 10px; font-size:3.5em;}
 #info {color: #333;  background: #eee; display: block; padding: 10px; margin: 10px -10px;}
 #gadget-container {}

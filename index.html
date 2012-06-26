@@ -13,6 +13,17 @@
 <link rel="stylesheet" href="css.css" />
 </head>
 <body>
+<div id="header">
+  <h1 id="site-title">XWIKI</h1>
+      
+      <div id="search-wrapper">
+        <form class="search" action="">
+          <input type="text" class="text-field"/>
+          <input type="submit" class="submit" value="submit" />
+        </form>
+        
+      </div>
+</div>
 <div id="main-area">
   <div id="breadcrumb">
     <ul>
@@ -55,18 +66,8 @@
   </div>
 </div>
 
-<div id="sidebar-wrapper">
   <div id="sidebar">
-    <div class="" id="title">
-      <h1 id="site-title">XWIKI</h1>
       
-      <div id="search-wrapper">
-        <form class="search" action="">
-          <input type="text" class="text-field"/>
-          <input type="submit" class="submit" value="submit" />
-        </form>
-        
-      </div>
 
     <div id="nav-control-wrapper">
       <div id="nav-icons">
@@ -91,7 +92,7 @@
           </ul> 
       </div>
     </div>
-</div>
+
 <div id="change">
   <div id="main" class="side-section">
     <div id="page-suplemental">
@@ -254,36 +255,21 @@
 </div><!--change-->
 
   </div>
-</div>
 
 
 
 <script>
 
-
-function hAdjust() // add height property to .html to allow for scrolling
-{
-    $("#change").css({'height':$(window).height()-$("#title").height()});
-}
-
-$(document).ready(function() { // apply the height property to enable scrolling
-  hAdjust();
-});
-
 // allow resizing of sidebar
-$( "#sidebar-wrapper" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w", stop: function() { 
-    $("#sidebar").width($(this).width());  
-    $( "#sidebar-wrapper" ).css({'left': $("#sidebar").position().left});
-  }
+$( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"
 });
 
 
 // make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
 $(window).resize(function () { 
-  hAdjust();
-  $("#main-area").width($(window).width()-$("#sidebar-wrapper").width());
-  $( "#sidebar-wrapper" ).css({'position': 'absolute', 'left': $("#sidebar").position().left, 'height': $(window).height()});
-
+  $("#main-area").width($(window).width()-$("#sidebar").width());
+  $( "#sidebar" ).css('left','');
+  $('#header').width($('#sidebar').width());
 });
 
 // .active is used to put the current section as the title header (for the dropdown menu)
