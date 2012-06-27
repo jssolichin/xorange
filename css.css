@@ -9,6 +9,7 @@ h3 {font-size:2em;}
 h4 {font-size:1.8em;}
 h5 {font-size:1.6em;}
 h6 {font-size:1.5em;}
+.mobile {display: none;}
 
 h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
 .search:after, .each-comment:after, #nav-icons ul:after, #page-actions:after, #breadcrumb:after, #content:after, #gadget-container:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
@@ -30,7 +31,8 @@ input.submit:active{
 background-position: 0 -32px; /* And finally, this is the one that shows the loader */
 cursor:wait; /* Shows the wait cursor on click */}
 
-#sidebar {width: 20%; position: fixed; right: 0px; top:130px; bottom: 0px; overflow-y: auto; z-index: 999; }
+#sidebar {width: 20%; position: fixed; right: 0px; top:130px; bottom: 0px; overflow-y: auto; z-index: 999; overflow-x: hidden;}
+#sidebar-handle {display: none;}
 #sidebar h3 {font-size: 1.6em; letter-spacing: -1px;}
 
 #nav-control-wrapper {height: 70px; padding: 30px 0 0px 0;}
@@ -39,6 +41,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #nav-icons ul li:nth-child(2) {margin-left: 32px;}
 #nav-icons ul li:nth-child(4) {margin-left: 26px;}
 #nav-icons ul li {float: left; margin: -8px 0 0 30px; color: #d25400; font-weight: bold;}
+#nav-control-selector {display: none;}
 #nav-control {position: absolute; clip: rect(0px 300px 40px 0px); z-index: 999; }
 #nav-control h2 { padding: 5px; visibility:hidden;}
 #nav-control:hover {clip: auto;}
@@ -100,3 +103,47 @@ cursor:wait; /* Shows the wait cursor on click */}
 ::-webkit-scrollbar-thumb {background: #aaa;}
 ::-webkit-scrollbar-thumb:hover {background: #777;}
 ::-webkit-scrollbar-thumb:active {background: #888;}
+
+@media only screen and (max-width: 1024px) {
+
+    #sidebar, #header {width: 30%;}
+#main-area {width: 70%;}
+#gadget-left, #gadget-right {float: none; width: 100%;}
+
+}
+
+@media only screen and (max-width: 480px) {
+	.mobile {display: block;}
+	#header:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+
+	#header {position: static; width: 95%;}
+	#site-title {text-align: center;}
+	#search-wrapper {width: 90%; margin: 0 auto;}
+
+	#swipe-hint {text-align: center; background: rgba(0,0,0,.1); padding: 3px; margin: 5px; font-weight: bold;}
+	#sidebar { width: 100%; bottom: auto; height: auto; position: static; }
+	#sidebar-wrapper {background: #ccc url(img/bg.png); position: absolute; top: 0; right: -90%; width: 90%; padding: 0 0 0 5%;}
+	#sidebar-handle {display: block; position: absolute; 
+		top: 200px;left: -98px;}
+	#sidebar-handle h2{ font-size:1.45em; text-transform: lowercase;
+		-webkit-transform: rotate(90deg); 
+     -moz-transform: rotate(90deg); 
+      -ms-transform: rotate(90deg); 
+       -o-transform: rotate(90deg); 
+          transform: rotate(90deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */
+                     M11=6.123031769111886e-17, M12=-1, M21=1, M22=6.123031769111886e-17, sizingMethod='auto expand');
+               zoom: 1;
+}
+    #change {overflow-x:hidden;overflow-y:auto;position:static; top: auto; bottom: auto;}
+    .side-section { margin-bottom: 20px;}
+    #page-suplemental { box-shadow: none;}
+    #nav-control-selector {display: block; margin: 15px 10px 10px 10px;}
+    #nav-control {display: none;}
+#content {box-shadow: none; }
+#main-area {width: 95%;}
+#gadget-left, #gadget-right {float: none; width: 100%;}
+.section-title:after {content: ' +';}
+.expanded:after {content: ' -';}
+.section-content {display: none;}
+}
