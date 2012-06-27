@@ -30,9 +30,33 @@
 <div id="main-area">
   <div id="breadcrumb">
     <ul>
-      <li><span>WIKI:</span>XWIKI</li>
-      <li><span>Space:</span>Platform Features</li>
-      <li><span>Page:</span>Page Editing</li>
+      <li id="wiki"><span>WIKI:</span>XWIKI
+        <ul>
+          <li><a href="#">watch wiki</a></li>
+          <li><a href="#">administer wiki</a></li>
+          <hr/>
+          <li><a href="#">document index</a></li>
+          <li><a href="#">dashboard</a></li>
+        </ul>
+      </li>
+      <li id="space"><span>Space:</span>Platform Features
+        <ul>
+          <li><a href="#">watch wiki</a></li>
+          <li><a href="#">administer wiki</a></li>
+          <hr/>
+          <li><a href="#">document index</a></li>
+          <li><a href="#">dashboard</a></li>
+        </ul>
+      </li>
+      <li id="page"><span>Page:</span>Page Editing
+        <ul>
+          <li><a href="#">watch wiki</a></li>
+          <li><a href="#">administer wiki</a></li>
+          <hr/>
+          <li><a href="#">document index</a></li>
+          <li><a href="#">dashboard</a></li>
+        </ul>
+      </li>
     </ul>
     <div class="clear"></div>
   </div>
@@ -88,26 +112,26 @@
   <div id="sidebar">
     <div id="nav-control-wrapper">
       <div id="nav-icons">
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-        </ul>
+        <div class="sprite sprite-main-png"><span>3</span></div>
+        <div class="sprite sprite-comments-png"><span>3</span></div>
+        <div class="sprite sprite-annotations-png"><span>5</span></div>
+        <div class="sprite sprite-attachments-png"><span>3</span></div>
+        <div class="sprite sprite-history-png"><span>3</span></div>
+        <div class="sprite sprite-info-png"><span>3</span></div>
       </div>
+      <div id="nav-control-header">
       <div id="nav-control">
         <h2>menu/comments/annotations/attachments/history/information</h2>
           <ul>
-            <li id="main-link" class="active"><a href="#main">Main</a></li>
-            <li id="comments-link"><a href="#comments">Comments</a></li>
-            <li id="annotations-link"><a href="#annotations">Annotations</a></li>
-            <li id="attachments-link"><a href="#attachments">Attachments</a></li>
-            <li id="history-link"><a href="#history">History</a></li>
-            <li id="information-link"><a href="#information">Information</a></li>
+            <li id="main-link" class="active"><a href="#main">Main</a> <span>3</span></li>
+            <li id="comments-link"><a href="#comments">Comments</a><span>3</span></li>
+            <li id="annotations-link"><a href="#annotations">Annotations</a><span>3</span></li>
+            <li id="attachments-link"><a href="#attachments">Attachments</a><span>3</span></li>
+            <li id="history-link"><a href="#history">History</a><span>3</span></li>
+            <li id="information-link"><a href="#information">Information</a><span>3</span></li>
           </ul> 
       </div>
+    </div>
     </div>
 
 <div id="change">
@@ -307,14 +331,14 @@ var isMobile = {
 
 // allow resizing of sidebar
 if( !(isMobile.any() || $(window).width() <= 480) ) 
-$( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"});
+$( "#sidebar" ).resizable({ minWidth: 256, maxWidth: 500, handles: "w"});
 
 // make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
 $(window).resize(function () { 
   if( !(isMobile.any() || $(window).width() <= 480) ) {
     $( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"});
     $("#main-area").width($(window).width()-$("#sidebar").width());
-    $( "#sidebar" ).css('left','');
+    $( "#sidebar" ).css({'left':'', 'bottom': 0});
     $('#header').width($('#sidebar').width());
   }
   else {
@@ -394,7 +418,7 @@ $('.section-title').click(function() {
 
 //--- start drop down creator 
   // Create the dropdown base
-  $("<select />").attr('id', 'nav-control-selector').appendTo("#nav-control-wrapper");
+  $("<select />").addClass('mobile').attr('id', 'nav-control-selector').appendTo("#nav-control-wrapper");
 
   // Create default option "Go to..."
   $("<option />", {
@@ -416,6 +440,30 @@ $('.section-title').click(function() {
   $("#nav-control-wrapper select").change(function() {
     window.location = $(this).find("option:selected").val();
   });
+
+$('#breadcrumb > ul > li').each(function(index){
+
+ $("<select />").addClass('mobile breadcrumb-drop').appendTo($(this));
+ var dropdown= $(this).find($('select'));
+ $("<option />", {
+     "selected": "selected",
+     "value"   : "",
+     "text"    : "Go to..."
+  }).appendTo(dropdown);
+
+ $(this).find('a').each(function() {
+   var el = $(this);
+   $("<option />", {
+       "value"   : el.attr("href"),
+       "text"    : el.text()
+   }).appendTo(dropdown);
+  });
+
+ $($(this).children($('select'))).change(function() {
+    window.location = $(this).find("option:selected").val();
+  });
+
+});
 //--- end drop down creator 
 
 </script>
