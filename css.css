@@ -20,19 +20,18 @@ h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
 	-moz-background-clip: padding; -webkit-background-clip: padding;background-clip: padding-box; }
 .no-rgba #search-wrapper {border: 10px solid #eee;}
 form{width:100%;}
-form .text-field{float: left;border: 0px ;padding: 2px;width:88%;}
-input.submit{width:16px;height:16x;display:block;overflow:hidden;
+form .text-field{float: left;border: 0px ;padding: 2px;width:86%;}
+input.submit{width:20px;height:20x;display:block;overflow:hidden;
 text-indent:-999px; /* To remove any default text on the button*/
 line-height:16px; /* required for IE */
-background:url(img/search-sprite.gif) no-repeat 0 0; /* This will display the search icon by default */
+background: url(img/sprite-icons.png) no-repeat 0 0; /* This will display the search icon by default */
 cursor:pointer; /* Hand cursor for the normal state */
 border: none;float: left;margin: 3px;padding: 0;}
-input.submit:hover{background-position: 0 -16px; /* This will display the dark search icon on hover */}
-input.submit:active{
-background-position: 0 -32px; /* And finally, this is the one that shows the loader */
-cursor:wait; /* Shows the wait cursor on click */}
 
-#sidebar {width: 20%; position: fixed; right: 0px; top:130px; bottom: 0px; overflow-y: auto; z-index: 999; overflow-x: hidden; min-width:256px;}
+
+#sidebar {width: 20%; position: fixed; right: 0px; top:130px; bottom: 0px; overflow-y: auto; z-index: 999; overflow-x: hidden; 
+  min-width:290px;}
+.no-js #sidebar {min-width:0px;}
 #sidebar-handle {display: none;}
 #sidebar h3 {font-size: 1.6em; letter-spacing: -1px;}
 
@@ -51,7 +50,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #nav-control:hover a {color: #eee; !important;}
 #nav-control:hover a:hover {color: #fff; !important;}
 
-#change {overflow-x:hidden;overflow-y:hidden;position:absolute; top: 100px; bottom: 0px;padding: 0px 10px 0px 10px;}
+#change {overflow-x:hidden;overflow-y:hidden;position:absolute; top: 100px; bottom: 0px;padding: 0px 10px 100px 10px;}
 #change:hover {overflow-y:auto;}
 #change a, #change a:visited {color: #d25400;}
 #change a:hover {color: #555;}
@@ -60,7 +59,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 .side-section { margin-bottom: 100px; }
 .side-section h2 span {position: absolute; right: 10px; color: #d25400; font-weight: bold;}
 
-#page-suplemental {box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); background: #fff; margin:0px -10px 10px -10px; padding: 10px;}
+#page-suplemental {box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); background: #fff; margin:10px -10px 10px -10px; padding: 10px;}
 #page-meta a:hover {background: #fff;}
 #page-meta {font-size:.8em; background:  url(img/bg.png); margin: 0 -10px; padding: 10px;}
 #page-meta dl dt, #page-meta dl dd {display: inline;}
@@ -70,7 +69,8 @@ cursor:wait; /* Shows the wait cursor on click */}
 #page-edit {float: left;}
 #page-export {float: right;}
 #page-export ul {display: inline;}
-#toc {margin: 5px 0;}
+#toc {margin: 0px 0;}
+#toc h3 {margin: 0px 0 5px 0;}
 #toc ul li ul {border-left: 2px solid rgba(0, 0, 0,.1); padding: 5px 10px; font-size: .8em;}
 
 .each-comment {font-size: .9em; background: rgba(255, 255, 255,.4); margin:0px -10px 10px -10px; padding: 10px;}
@@ -114,13 +114,13 @@ cursor:wait; /* Shows the wait cursor on click */}
 
 @media only screen and (max-width: 1024px) {
 
-    #sidebar, #header {width: 30%;}
-#main-area {width: 70%;}
-#gadget-left, #gadget-right {float: none; width: 100%;}
+  #sidebar, #header {width: 30%;}
+  #main-area {width: 70%;}
+  #gadget-left, #gadget-right {float: none; width: 100%;}
 
 }
 
-@media only screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
 	.mobile {display: block;}
 	#header:after,#breadcrumb ul li:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 
@@ -129,7 +129,8 @@ cursor:wait; /* Shows the wait cursor on click */}
 	#search-wrapper {width: 90%; margin: 0 auto;}
 
 	#swipe-hint {text-align: center; background: rgba(0,0,0,.1); padding: 3px; margin: 5px; font-weight: bold;}
-	#sidebar { width: 100%; bottom: auto; height: auto; position: static; }
+	.no-touch #swipe-hint {display: none;}
+  #sidebar { width: 100%; bottom: auto; height: auto; position: static; }
 	#sidebar-wrapper {background: #ccc url(img/bg.png); position: absolute; top: 0; right: -90%; width: 90%; padding: 0 0 0 5%;}
 	#sidebar-handle {display: block; position: absolute; 
 		top: 200px;left: -98px;}
@@ -139,27 +140,29 @@ cursor:wait; /* Shows the wait cursor on click */}
       -ms-transform: rotate(90deg); 
        -o-transform: rotate(90deg); 
           transform: rotate(90deg);
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */
-                     M11=6.123031769111886e-17, M12=-1, M21=1, M22=6.123031769111886e-17, sizingMethod='auto expand');
-               zoom: 1;
-}
-    #change {overflow-x:hidden;overflow-y:auto;position:static; top: auto; bottom: auto;}
-    .side-section { margin-bottom: 20px;}
-    #page-suplemental { box-shadow: none;}
-    #nav-control-selector {margin: 15px 10px 10px 10px;}
-    #nav-control {display: none;}
-#content {box-shadow: none; }
-#main-area {width: 95%;}
-#gadget-left, #gadget-right {float: none; width: 100%;}
-.section-title:after {content: ' +';}
-.expanded:after {content: ' -';}
-.section-content {display: none;}
+  }
+  .no-csstransforms  #sidebar-handle { filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1); left: 0px;}
+  
+  #change {overflow-x:hidden;overflow-y:auto;position:static; top: auto; bottom: auto;}
+  .side-section { margin-bottom: 20px;}
+  #page-suplemental { box-shadow: none;}
+  #nav-control-selector {margin: 15px 10px 10px 10px;}
+  #nav-control {display: none;}
+  
+  #main-area {width: 95%;}
+  #content {box-shadow: none; }
 
-#breadcrumb {margin: 0px;}
-#breadcrumb ul li {float: none; background: rgba(0,0,0,.5); color: #fff; margin: 5px 0;}
-#breadcrumb ul li:hover ul {display: none;}
-#breadcrumb ul li:before{content: ""; margin: 0px;}
-.breadcrumb-drop {display: inline ; float: right;}
+  #breadcrumb {margin: 0px;}
+  #breadcrumb ul li {float: none; background: rgba(0,0,0,.5); color: #fff; margin: 5px 0;}
+  .no-rgba #breadcrumb ul li {background: #333;}
+  #breadcrumb ul li:hover ul {display: none;}
+  #breadcrumb ul li:before{content: ""; margin: 0px;}
+  .breadcrumb-drop {display: inline ; float: right;}
+
+  #gadget-left, #gadget-right {float: none; width: 100%;}
+  .section-title:after {content: ' +';}
+  .expanded:after {content: ' -';}
+  .section-content {display: none;}
 
 }
 
@@ -167,38 +170,61 @@ cursor:wait; /* Shows the wait cursor on click */}
     background: url(img/sprite-icons.png) no-repeat; float: left; position: relative; margin-right: 20px; 
 }
 .sprite span {position: absolute; top: -5px; right: -10px; color: #d25400; font-weight: bold;}
+
 .sprite-attachments-png {
+    width: 20px;
+    height: 20px;
+    background-position: -31px -62px;
+}
+
+.sprite-edit-png {
+    width: 20px;
+    height: 20px;
+    background-position: -0px -62px;
+}
+
+.sprite-history-png {
+    width: 20px;
+    height: 20px;
+    background-position: -62px -31px;
+}
+
+.sprite-home-png {
     width: 20px;
     height: 20px;
     background-position: -62px -0px;
 }
 
-.sprite-comments-png {
-    width: 20px;
-    height: 20px;
-    background-position: -0px -31px;
-}
-.sprite-history-png {
+.sprite-information-png {
     width: 20px;
     height: 20px;
     background-position: -31px -31px;
 }
 
-.sprite-main-png {
+.sprite-navigation-png {
     width: 20px;
     height: 20px;
     background-position: -0px -31px;
 }
 
-.sprite-info-png {
+.sprite-comments-png {
+    width: 20px;
+    height: 20px;
+    background-position: -62px 0px;
+}
+.sprite-export-png {
     width: 20px;
     height: 20px;
     background-position: -31px -0px;
 }
 
-.sprite-main-png {
+.sprite-search-png {
     width: 20px;
     height: 20px;
     background-position: -0px -0px;
 }
-
+.sprite-history-png {
+    width: 20px;
+    height: 20px;
+    background-position: -62px -31px;
+}

@@ -112,56 +112,38 @@
 
 <div id="sidebar-wrapper">
   <div id="sidebar-handle">
-<h2><a id="to-menu">Menu + More</a> &nbsp;//&nbsp;  
-  <a id="to-content">Content</a> </h2></div>
+<h2><a id="to-menu" href="#sidebar">Menu + More</a> &nbsp;//&nbsp;  
+  <a id="to-content" href="#main-area">Content</a> </h2></div>
   <div id="sidebar">
     <div id="nav-control-wrapper">
       <div id="nav-icons">
-        <a href="#main"><div class="sprite sprite-main-png"></div></a>
+        <a href="#navigation"><div class="sprite sprite-navigation-png"></div></a>
         <a href="#comments"><div class="sprite sprite-comments-png"><span>3</span></div></a>
         <a href="#attachments"><div class="sprite sprite-attachments-png"><span>5</span></div></a>
         <a href="#history"><div class="sprite sprite-history-png"></div></a>
-        <a href="#information"><div class="sprite sprite-info-png"></div></a>
+        <a href="#information"><div class="sprite sprite-information-png"></div></a>
+        <a href="#edit"><div class="sprite sprite-edit-png"></div></a>
+        <a href="#export"><div class="sprite sprite-export-png"></div></a>
       </div>
       <div id="nav-control-header">
       <div id="nav-control">
         <h2>navigation</h2>
           <ul>
-            <li id="main-link" class="active"><a href="#main">Main</a></li>
+            <li id="navigation-link" class="active"><a href="#navigation">Navigation</a></li>
             <li id="comments-link"><a href="#comments">Comments</a><span>3</span></li>
             <li id="attachments-link"><a href="#attachments">Attachments</a><span>3</span></li>
             <li id="history-link"><a href="#history">History</a></li>
             <li id="information-link"><a href="#information">Information</a></li>
+            <li id="edit-link"><a href="#edit">Edit</a></li>
+            <li id="export-link"><a href="#export">Export</a></li>
           </ul> 
       </div>
     </div>
     </div>
 
 <div id="change">
-  <div id="main" class="side-section">
+  <div id="navigation" class="side-section">
     <div id="page-suplemental">
-      <div id="page-meta">
-        <dl>
-          <dt>Last Modified:</dt>
-           <dd><a href="#">Vincent Massol</a> on 2011/10/06 16:18</dd></br>
-          <dt>Created: </dt>
-           <dd><a href="#">Admin</a> on 2011/7/06 05:18</dd></br>
-         <dt>Tags:</dt>
-           <dd><a href="#">Hello</a>, <a href="#">World</a>, <a href="#">Foobar</a></dd>
-        </dl>
-        <div id="page-actions">
-          <ul>
-            <li id="page-edit"><a href="#">edit</a></li> 
-            <li id="page-export">export:
-              <ul>
-                <li><a href="#">.pdf</a>, </li>
-                <li><a href="#">.rtf</a>, </li>
-                <li><a href="#">.html</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div id="toc">
         <h3>Table of Contents</h3>
         <ul>
@@ -267,6 +249,30 @@
   <div id="information-wrapper" class="side-section">
     <h2>Information</h2>
     <div id="information">
+      <div id="page-suplemental">
+      <div id="page-meta">
+        <dl>
+          <dt>Last Modified:</dt>
+           <dd><a href="#">Vincent Massol</a> on 2011/10/06 16:18</dd></br>
+          <dt>Created: </dt>
+           <dd><a href="#">Admin</a> on 2011/7/06 05:18</dd></br>
+         <dt>Tags:</dt>
+           <dd><a href="#">Hello</a>, <a href="#">World</a>, <a href="#">Foobar</a></dd>
+        </dl>
+        <div id="page-actions">
+          <ul>
+            <li id="page-edit"><a href="#">edit</a></li> 
+            <li id="page-export">export:
+              <ul>
+                <li><a href="#">.pdf</a>, </li>
+                <li><a href="#">.rtf</a>, </li>
+                <li><a href="#">.html</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
       <h3 class="sub-menu">Parent</h3>
       <ul>
         <li><a href="#">Platform Features</a></li>
@@ -295,6 +301,33 @@
       </ul>
     </div>
   </div>
+
+  <div id="edit-wrapper" class="side-section">
+    <h3 class="sub-menu">Edit</h3>
+    <div id="edit">
+      <ul>
+        <li><a href="#">Wiki</a></li>
+        <li><a href="#">WYSWYG</a></li>
+        <li><a href="#">Inline Form</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="export-wrapper" class="side-section">
+    <div id="export">
+      <ul>
+        <li><a href="#">Print Preview</a></li>
+        <li><a href="#">View Source</a></li>
+      </ul>
+      <h3 class="sub-menu">Save As</h3>
+      <ul>
+        <li><a href="#">.pdf</a></li>
+        <li><a href="#">.rtf</a></li>
+        <li><a href="#">.html</a></li>
+      </ul>
+    </div>
+  </div>
+
 </div><!--change-->
 
   </div>
@@ -322,24 +355,26 @@ var isMobile = {
 };
 
 // allow resizing of sidebar
-if( !(isMobile.any() || $(window).width() <= 480) ) {
-  $('#main-area').width($(window).width()-$("#sidebar").width());
-$( "#sidebar" ).resizable({ minWidth: 256, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
-$('#header').width($('#sidebar').width());
-}
-
-// make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
-$(window).resize(function () { 
+function resizeControl () {
   if( !(isMobile.any() || $(window).width() <= 480) ) {
     $("#main-area").width($(window).width()-$("#sidebar").width());
-    $( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
+    $( "#sidebar" ).resizable({ minWidth: 290, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
     $('#header').width($('#sidebar').width());
   }
   else {
     $("#main-area").width('95%');
-    $('#header').width('');
+    $('#header').width('95%');
     $('#sidebar').height('').width('');
   }
+}
+
+$(document).ready(function() {
+  resizeControl();
+});
+
+// make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
+$(window).resize(function () { 
+  resizeControl();
 });
 
 // .active is used to put the current section as the title header (for the dropdown menu)
@@ -354,9 +389,9 @@ $("#change").scroll(function(){
 
 // first get position of div from the top. then check if that position has now become 0. if it has become 0, then viewer is in that section. However since, we originally have a title there, we will offset 25 so that the section is activated once the original title go above the view. Additionally, check that it is within the div's position from the top + the height of the div. 
 
-if( $('#main').position().top <= 0 && $('#main').position().top >0-$('#main').height()){
+if( $('#navigation').position().top <= 0 && $('#navigation').position().top >0-$('#navigation').height()){
     $(".active").removeClass('active');
-    $("#main-link").addClass('active')
+    $("#navigation-link").addClass('active')
   }
   
   if( $('#comments').position().top <= 0 && $('#comments').position().top >0-$('#comments').height()){
@@ -373,11 +408,21 @@ if( $('#main').position().top <= 0 && $('#main').position().top >0-$('#main').he
     $(".active").removeClass('active');
     $("#history-link").addClass('active')
   }
-  
-//the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. Either that or, the div's position is now 0 like before AND it has passed the previous section. 
-  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight() || $('#information').position().top <= 0 && $('#history').position().top >0-$('#history').height()) {
+
+  if( $('#information').position().top <= 0 && $('#information').position().top >0-$('#information').height()){
     $(".active").removeClass('active');
     $("#information-link").addClass('active')
+  }
+
+  if( $('#edit').position().top <= 0 && $('#edit').position().top >0-$('#edit').height()){
+    $(".active").removeClass('active');
+    $("#edit-link").addClass('active')
+  }
+  
+//the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. Either that or, the div's position is now 0 like before AND it has passed the previous section. 
+  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight() || $('#export').position().top <= 0 && $('#export').position().top >0-$('#export').height()) {
+    $(".active").removeClass('active');
+    $("#export-link").addClass('active')
   }
 });
 
