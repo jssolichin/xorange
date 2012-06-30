@@ -1,16 +1,21 @@
 
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
 <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-<title>xwiki demo</title>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="reset.css" />
 <link rel="stylesheet" href="css.css" />
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+   <script type="text/javascript" src="js/modernizr.js"></script>
+   <script type="text/javascript" src="js/respond.min.js"></script>
+   
+<title>xwiki demo</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width">
 </head>
@@ -112,23 +117,21 @@
   <div id="sidebar">
     <div id="nav-control-wrapper">
       <div id="nav-icons">
-        <div class="sprite sprite-main-png"><span>3</span></div>
-        <div class="sprite sprite-comments-png"><span>3</span></div>
-        <div class="sprite sprite-annotations-png"><span>5</span></div>
-        <div class="sprite sprite-attachments-png"><span>3</span></div>
-        <div class="sprite sprite-history-png"><span>3</span></div>
-        <div class="sprite sprite-info-png"><span>3</span></div>
+        <a href="#main"><div class="sprite sprite-main-png"></div></a>
+        <a href="#comments"><div class="sprite sprite-comments-png"><span>3</span></div></a>
+        <a href="#attachments"><div class="sprite sprite-attachments-png"><span>5</span></div></a>
+        <a href="#history"><div class="sprite sprite-history-png"></div></a>
+        <a href="#information"><div class="sprite sprite-info-png"></div></a>
       </div>
       <div id="nav-control-header">
       <div id="nav-control">
-        <h2>menu/comments/annotations/attachments/history/information</h2>
+        <h2>navigation</h2>
           <ul>
-            <li id="main-link" class="active"><a href="#main">Main</a> <span>3</span></li>
+            <li id="main-link" class="active"><a href="#main">Main</a></li>
             <li id="comments-link"><a href="#comments">Comments</a><span>3</span></li>
-            <li id="annotations-link"><a href="#annotations">Annotations</a><span>3</span></li>
             <li id="attachments-link"><a href="#attachments">Attachments</a><span>3</span></li>
-            <li id="history-link"><a href="#history">History</a><span>3</span></li>
-            <li id="information-link"><a href="#information">Information</a><span>3</span></li>
+            <li id="history-link"><a href="#history">History</a></li>
+            <li id="information-link"><a href="#information">Information</a></li>
           </ul> 
       </div>
     </div>
@@ -188,8 +191,8 @@
     </ul>
   </div>
 
-  <div id="comments" class="side-section">
-    <h2>Comments</h2>
+  <div id="comments-wrapper" class="side-section">
+    <h2>Comments<span>3</span></h2>
     <div id="comments">
       <div class="each-comment">
         <div class="each-comment-content">
@@ -224,19 +227,8 @@
     </div>
   </div>
 
-  <div id="annotations-wrapper" class="side-section">
-    <h2>Annotations</h2>
-    <div id="annotations">
-      <div class="each-comment">
-        <div class="each-comment-content">
-          <p>No annotations for this document</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="attachments-wrapper" class="side-section">
-    <h2>Attachments</h2>
+    <h2>Attachments<span>3</span></h2>
     <div id="attachments">
       <div class="each-comment">
         <div class="each-comment-content">
@@ -266,7 +258,7 @@
     <div id="history">
       <div class="each-comment">
         <div class="each-comment-content">
-          <p>No annotations for this document</p>
+          <p>No history for this document</p>
         </div>
       </div>
     </div>
@@ -330,21 +322,23 @@ var isMobile = {
 };
 
 // allow resizing of sidebar
-if( !(isMobile.any() || $(window).width() <= 480) ) 
-$( "#sidebar" ).resizable({ minWidth: 256, maxWidth: 500, handles: "w"});
+if( !(isMobile.any() || $(window).width() <= 480) ) {
+  $('#main-area').width($(window).width()-$("#sidebar").width());
+$( "#sidebar" ).resizable({ minWidth: 256, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
+$('#header').width($('#sidebar').width());
+}
 
 // make sure things are ok even when we adjust window && recheck positions of section when resized-- need to optimize somehow.
 $(window).resize(function () { 
   if( !(isMobile.any() || $(window).width() <= 480) ) {
-    $( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"});
     $("#main-area").width($(window).width()-$("#sidebar").width());
-    $( "#sidebar" ).css({'left':'', 'bottom': 0});
+    $( "#sidebar" ).resizable({ minWidth: 200, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
     $('#header').width($('#sidebar').width());
   }
   else {
     $("#main-area").width('95%');
     $('#header').width('');
-    $('#sidebar').height('');
+    $('#sidebar').height('').width('');
   }
 });
 
@@ -360,7 +354,7 @@ $("#change").scroll(function(){
 
 // first get position of div from the top. then check if that position has now become 0. if it has become 0, then viewer is in that section. However since, we originally have a title there, we will offset 25 so that the section is activated once the original title go above the view. Additionally, check that it is within the div's position from the top + the height of the div. 
 
-  if( $('#main').position().top <= 0 && $('#main').position().top >0-$('#main').height()){
+if( $('#main').position().top <= 0 && $('#main').position().top >0-$('#main').height()){
     $(".active").removeClass('active');
     $("#main-link").addClass('active')
   }
@@ -368,11 +362,6 @@ $("#change").scroll(function(){
   if( $('#comments').position().top <= 0 && $('#comments').position().top >0-$('#comments').height()){
     $(".active").removeClass('active');
     $("#comments-link").addClass('active')
-  }
-
-  if( $('#annotations').position().top <= 0 && $('#annotations').position().top >0-$('#annotations').height()){
-    $(".active").removeClass('active');
-    $("#annotations-link").addClass('active')
   }
 
   if( $('#attachments').position().top <= 0 && $('#attachments').position().top >0-$('#attachments').height()){
@@ -386,7 +375,7 @@ $("#change").scroll(function(){
   }
   
 //the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. Either that or, the div's position is now 0 like before AND it has passed the previous section. 
-  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight() || $('#information').position().top <= -25 && $('#history').position().top >0-$('#history').height()) {
+  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight() || $('#information').position().top <= 0 && $('#history').position().top >0-$('#history').height()) {
     $(".active").removeClass('active');
     $("#information-link").addClass('active')
   }
@@ -411,7 +400,7 @@ $( "#to-content" ).click(function() {
 
 // shrink content area on mobile to be toggle able
 $('.section-title').click(function() {
-    $(this).next('.section-content').toggle(function() {
+    $(this).next('.section-content').slideToggle(200,function() {
       $(this).prev('.section-title').toggleClass('expanded');
     });
 });

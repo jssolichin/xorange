@@ -18,6 +18,7 @@ h2, #nav-control ul li a {letter-spacing: -2px; font-size: 2em;}
 #site-title {margin: 14px 10px;font-size: 3em; font-weight:bold;}
 #search-wrapper {background: #fff; padding: 5px; border: 10px solid rgba(0,0,0,0.1);
 	-moz-background-clip: padding; -webkit-background-clip: padding;background-clip: padding-box; }
+.no-rgba #search-wrapper {border: 10px solid #eee;}
 form{width:100%;}
 form .text-field{float: left;border: 0px ;padding: 2px;width:88%;}
 input.submit{width:16px;height:16x;display:block;overflow:hidden;
@@ -38,10 +39,10 @@ cursor:wait; /* Shows the wait cursor on click */}
 #nav-control-wrapper {height: 70px; padding: 30px 0 0px 0; position: relative;}
 #nav-control-header {margin-top: 0px;}
 #nav-icons {margin: 0 0 10px 10px;}
-#nav-control {position: absolute; clip: rect(0px 300px 40px 0px); z-index: 999; }
-#nav-control h2 { padding: 5px; visibility:hidden;}
+#nav-control {position: absolute; clip: rect(0px 300px 40px 0px); z-index: 999; width: 100%;}
+#nav-control h2 { padding: 5px; visibility: hidden;}
 #nav-control:hover {clip: auto;}
-#nav-control ul {list-style-type: none; margin: 0px; padding: 0px;}
+#nav-control ul {list-style-type: none; margin: 0px; padding: 0px; width: 100%; }
 #nav-control ul li {background: #333; padding: 5px 10px; width: 100%;}
 #nav-control ul li a {text-decoration: none; color: #000; float: left;}
 #nav-control ul li span {color: #d25400; margin-left: 3px;}
@@ -56,7 +57,8 @@ cursor:wait; /* Shows the wait cursor on click */}
 #change a:hover {color: #555;}
 #change h3 {margin: 10px 0 5px 0;}
 #change ul li a {text-decoration: none; font-size: 1.2em; letter-spacing: -1px;}
-.side-section { margin-bottom: 100px;}
+.side-section { margin-bottom: 100px; }
+.side-section h2 span {position: absolute; right: 10px; color: #d25400; font-weight: bold;}
 
 #page-suplemental {box-shadow: inset 30px 0px 0px rgba(0, 0, 0,.1); background: #fff; margin:0px -10px 10px -10px; padding: 10px;}
 #page-meta a:hover {background: #fff;}
@@ -72,6 +74,7 @@ cursor:wait; /* Shows the wait cursor on click */}
 #toc ul li ul {border-left: 2px solid rgba(0, 0, 0,.1); padding: 5px 10px; font-size: .8em;}
 
 .each-comment {font-size: .9em; background: rgba(255, 255, 255,.4); margin:0px -10px 10px -10px; padding: 10px;}
+.no-rgba .each-comment {background: #eee;}
 .each-comment-user img {float: left; margin: 0 10px 0 0;}
 .each-comment-user h4 {font-size: 1.4em; letter-spacing: -1px;margin: 10px 0 0 0 ;}
 
@@ -84,6 +87,8 @@ cursor:wait; /* Shows the wait cursor on click */}
 #breadcrumb ul li:first-child:before{content: ""; margin: 0px;}
 #breadcrumb ul li:hover {background: rgba(0,0,0,.5); color: #fff;}
 #breadcrumb ul li ul {background: rgba(0,0,0,.5); padding: 5px; position: absolute; margin: 5px 0 0 -5px; font-size: .8em; display: none; }
+.no-rgba #breadcrumb ul li:hover, .no-rgba #breadcrumb ul li ul {background: #333;}
+.no-rgba #breadcrumb ul li ul li:hover {background: #000;}
 #breadcrumb ul li:hover ul {display: block;}
 #breadcrumb ul li ul hr {visibility: hidden; height: 1px;}
 #breadcrumb ul li ul a {color: #fff; text-decoration: none;}
@@ -93,7 +98,6 @@ cursor:wait; /* Shows the wait cursor on click */}
 #content {color: #555;  font-size: .9em;background: #fff; border-top: 20px solid #d25400; padding: 10px 10px 15px 10px; box-shadow: 30px 0px 0px rgba(0, 0, 0,.1); }
 #page-title {margin-bottom: 10px; font-size:3.5em;}
 #info {color: #333;  background: #eee; display: block; padding: 10px; margin: 10px -10px;}
-#gadget-container {}
 #gadget-left, #gadget-right {float: left; width: 48.618784527%;
     *width: 48.5655930376383%;}
 #gadget-left {margin-left: .7%;}
@@ -163,12 +167,6 @@ cursor:wait; /* Shows the wait cursor on click */}
     background: url(img/sprite-icons.png) no-repeat; float: left; position: relative; margin-right: 20px; 
 }
 .sprite span {position: absolute; top: -5px; right: -10px; color: #d25400; font-weight: bold;}
-.sprite-annotations-png {
-    width: 20px;
-    height: 20px;
-    background-position: -62px -31px;
-}
-
 .sprite-attachments-png {
     width: 20px;
     height: 20px;
@@ -203,3 +201,4 @@ cursor:wait; /* Shows the wait cursor on click */}
     height: 20px;
     background-position: -0px -0px;
 }
+
