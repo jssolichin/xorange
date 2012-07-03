@@ -140,7 +140,7 @@ article section p { margin-top: 10px;}
   #change {overflow-x:hidden;overflow-y:auto;position:static; top: auto; bottom: auto;}
   section { margin-bottom: 20px;}
   #page-suplemental { box-shadow: none;}
-  #sidebar-control-links-selector {margin: 15px 10px 10px 10px;}
+  #sidebar-control-selector {margin: 40px 10px 10px 10px;}
   #sidebar-control-links {display: none;}
   
   #main-area {width: 95%;}

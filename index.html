@@ -335,38 +335,6 @@
 
 <script>
 
-var isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i) ? true : false;
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i) ? true : false;
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i) ? true : false;
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
-    }
-};
-
-// allow resizing of sidebar
-function resizeControl () {
-  if( !(isMobile.any() || $(window).width() <= 480) ) {
-    $("#main-area").width($(window).width()-$("#sidebar").width());
-    $( "#sidebar" ).resizable({ minWidth: 290, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
-    $('header').width($('#sidebar').width());
-  }
-  else {
-    $("#main-area").width('95%');
-    $('header').width('95%');
-    $('#sidebar').height('').width('');
-  }
-}
-
 $(document).ready(function() {
   resizeControl();
 });
@@ -376,129 +344,126 @@ $(window).resize(function () {
   resizeControl();
 });
 
-// .active is used to put the current section as the title header (for the dropdown menu)
-// apply .active on click since scroll detection might not be triggered
-$("#nav-control ul li").click(function(){
-    $(".active").removeClass('active');
-    $(this).addClass('active')
-  });
+// allow resizing of sidebar&create dropdown only if no-touch (provided by modernizr) & greater than 480px
+function resizeControl () {
+  if( $('html.no-touch').length && $(window).width() > 480 ) {
+    $("#main-area").width($(window).width()-$("#sidebar").width());
+    $( "#sidebar" ).resizable({ minWidth: 290, maxWidth: 500, handles: "w"}).css({'left': $("#main-area").position().left+$("#main-area").width(), 'bottom': 0, 'top': ''});
+    $('header').width($('#sidebar').width());
+  }
+  else {
+    $("#main-area").width('95%');
+    $('header').width('95%');
+    $('#sidebar').height('').width('');
 
-// indicate which section at while scrolling and apply .active to active section
-$("#change").scroll(function(){
+    if(!($('#sidebar-control-selector').length)) { //checks to make sure only do onece
+      createDrop();
 
-// first get position of div from the top. then check if that position has now become 0. if it has become 0, then viewer is in that section. However since, we originally have a title there, we will offset 25 so that the section is activated once the original title go above the view. Additionally, check that it is within the div's position from the top + the height of the div. 
+      //mobile implementation
+      // make #sidebar-handle vertically fixed
+      $(window).scroll(function(){
+          $( "#sidebar-handle" ).css({
+            'top': $(window).scrollTop()+180
+          });
+      });
+      // shortcut to menu/content in #sidebar-handle
+      $( "#to-menu" ).click(function() {
+          window.scrollTo(390,window.pageYOffset);
+          return false;
+      });
+      $( "#to-content" ).click(function() {
+          window.scrollTo(0,window.pageYOffset);
+          return false;
+      });
 
-if( $('#navigation').position().top <= 0 && $('#navigation').position().top >0-$('#navigation').height()){
-    $(".active").removeClass('active');
-    $("#navigation-link").addClass('active')
+      // shrink content area on mobile to be toggle able
+      $('article section h2').click(function() {
+          $(this).next('.section-content').slideToggle(200,function() {
+            $(this).prev('article section h2').toggleClass('expanded');
+          });
+      });
+    }
   }
   
-  if( $('#comments').position().top <= 0 && $('#comments').position().top >0-$('#comments').height()){
-    $(".active").removeClass('active');
-    $("#comments-link").addClass('active')
-  }
+  //changing the link header only matters if >480px and you see it.
+  if($(window).width() > 480 ) {
+    // .active is used to put the current section as the title header (for the dropdown menu)
+    // apply .active on click since scroll detection might not be triggered
+    $("#nav-control ul li").click(function(){
+        $(".active").removeClass('active');
+        $(this).addClass('active')
+      });
 
-  if( $('#attachments').position().top <= 0 && $('#attachments').position().top >0-$('#attachments').height()){
-    $(".active").removeClass('active');
-    $("#attachments-link").addClass('active')
-  }
-
-  if( $('#history').position().top <= 0 && $('#history').position().top >0-$('#history').height()){
-    $(".active").removeClass('active');
-    $("#history-link").addClass('active')
-  }
-
-  if( $('#information').position().top <= 0 && $('#information').position().top >0-$('#information').height()){
-    $(".active").removeClass('active');
-    $("#information-link").addClass('active')
-  }
-
-  if( $('#export').position().top <= 0 && $('#export').position().top >0-$('#export').height()){
-    $(".active").removeClass('active');
-    $("#export-link").addClass('active')
-  }
-  
-//the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. Either that or, the div's position is now 0 like before AND it has passed the previous section. 
-  if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight() || $('#edit').position().top <= 0 && $('#export').position().top >0-$('#export').height()) {
-    $(".active").removeClass('active');
-    $("#edit-link").addClass('active')
-  }
-});
-
-// make handle vertically fixed
-$(window).scroll(function(){
-    $( "#sidebar-handle" ).css({
-      'top': $(window).scrollTop()+180
+    // indicate which section at while scrolling and apply .active to active section
+    $("#change").scroll(function(){
+      // first get position of div from the top. then check if that position has now become 0. if it has become 0, then viewer is in that section. However since, we originally have a title there, we will offset 25 so that the section is activated once the original title go above the view. Additionally, check that it is within the div's position from the top + the height of the div. 
+      $('#sidebar-control-links ul li').each(function(){
+        var el = $(this).children('a').attr('href');
+        if($(el).position().top <= 0 && $(el).position().top >0-$(el).height()){
+          $(".active").removeClass('active');
+          $(this).addClass('active');
+        }
+      });
+      //the last section is a bit different since if the viewer can no longer scroll, that means he is in the last section. 
+      if($("#change")[0].scrollHeight - $("#change").scrollTop() == $("#change").outerHeight()){
+        $(".active").removeClass('active');
+        $("#edit-link").addClass('active')
+      }
     });
-});
+  }
 
-// shortcut to menu/content
-$( "#to-menu" ).click(function() {
-    window.scrollTo(390,window.pageYOffset);
-    return false;
-});
-$( "#to-content" ).click(function() {
-    window.scrollTo(0,window.pageYOffset);
-    return false;
-});
+}
 
-// shrink content area on mobile to be toggle able
-$('article section h2').click(function() {
-    $(this).next('.section-content').slideToggle(200,function() {
-      $(this).prev('article section h2').toggleClass('expanded');
-    });
-});
-
+function createDrop () {
 //--- start drop down creator 
   // Create the dropdown base
-  $("<select />").addClass('mobile').attr('id', 'nav-control-selector').appendTo("#nav-control-wrapper");
+  $("<select />").addClass('mobile').attr('id', 'sidebar-control-selector').appendTo("#sidebar-control");
 
   // Create default option "Go to..."
   $("<option />", {
      "selected": "selected",
      "value"   : "",
      "text"    : "Go to..."
-  }).appendTo("#nav-control-wrapper select");
+  }).appendTo("#sidebar-control-selector");
 
   // Populate dropdown with menu items
-  $("#nav-control ul li a").each(function() {
+  $("#sidebar-control-links ul li a").each(function() {
    var el = $(this);
    $("<option />", {
        "value"   : el.attr("href"),
        "text"    : el.text()
-   }).appendTo("#nav-control-wrapper select");
+   }).appendTo("#sidebar-control-selector");
   });
 
   //move to targeted drop down
-  $("#nav-control-wrapper select").change(function() {
+  $("#sidebar-control-selector").change(function() {
     window.location = $(this).find("option:selected").val();
   });
 
-$('#breadcrumb > ul > li').each(function(index){
+  //samething for breadcrumb
+  $('#breadcrumb > ul > li').each(function(index){
+    $("<select />").addClass('mobile breadcrumb-drop').appendTo($(this));
+    var dropdown= $(this).find($('select'));
+    $("<option />", {
+       "selected": "selected",
+       "value"   : "",
+       "text"    : "Go to..."
+    }).appendTo(dropdown);
 
- $("<select />").addClass('mobile breadcrumb-drop').appendTo($(this));
- var dropdown= $(this).find($('select'));
- $("<option />", {
-     "selected": "selected",
-     "value"   : "",
-     "text"    : "Go to..."
-  }).appendTo(dropdown);
+    $(this).find('a').each(function() {
+     var el = $(this);
+     $("<option />", {
+         "value"   : el.attr("href"),
+         "text"    : el.text()
+     }).appendTo(dropdown);
+    });
 
- $(this).find('a').each(function() {
-   var el = $(this);
-   $("<option />", {
-       "value"   : el.attr("href"),
-       "text"    : el.text()
-   }).appendTo(dropdown);
+    $($(this).children($('select'))).change(function() {
+      window.location = $(this).find("option:selected").val();
+    });
   });
-
- $($(this).children($('select'))).change(function() {
-    window.location = $(this).find("option:selected").val();
-  });
-
-});
 //--- end drop down creator 
-
+}
 </script>
 </body>
 </html>
